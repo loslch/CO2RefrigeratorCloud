@@ -54,3 +54,6 @@ docs/_build/
 
 # sqlite database files
 *.sqlite3
+
+# idea
+.idea/workspace.xml
