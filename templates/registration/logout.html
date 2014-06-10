@@ -1,6 +1,8 @@
-{% extends "base.html" %}
+{% extends "registration_base.html" %}
 {% load i18n %}
 
 {% block content %}
-<p>{% trans "Logged out" %}</p>
+<script>
+    location.href="{% url 'index' %}";
+</script>
 {% endblock %}

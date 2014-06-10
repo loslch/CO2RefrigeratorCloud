@@ -1,0 +1,13 @@
+{% load device_tag %}
+{% block devices %}
+    {% if user|is_display_devices_menu %}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i> My Devices <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+              {% for device in user|get_my_devices %}
+                <li><a href="/device/{{ device.device_id }}">{{ device.device_id }}</a></li>
+              {% endfor %}
+              </ul>
+            </li>
+    {% endif %}
+{% endblock %}

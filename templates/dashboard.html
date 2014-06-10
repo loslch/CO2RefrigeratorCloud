@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+    <div id="page-wrapper">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Dashboard <small>Overview</small></h1>
+                <ol class="breadcrumb">
+                    <li class="active"><i class="fa fa-dashboard"></i> Dashboard</li>
+                </ol>
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    Welcome to CO2 Incubator Cloud Management!
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-3">
+                    <div class="panel panel-info">
+                      <div class="panel-heading">
+                        <div class="row">
+                          <div class="col-xs-6">
+                            <i class="fa fa-comments fa-5x"></i>
+                          </div>
+                          <div class="col-xs-6 text-right">
+                            <p class="announcement-heading">456</p>
+                            <p class="announcement-text">New Mentions!</p>
+                          </div>
+                        </div>
+                      </div>
+                      <a href="#">
+                        <div class="panel-footer announcement-bottom">
+                          <div class="row">
+                            <div class="col-xs-6">
+                              View Mentions
+                            </div>
+                            <div class="col-xs-6 text-right">
+                              <i class="fa fa-arrow-circle-right"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="panel panel-warning">
+                      <div class="panel-heading">
+                        <div class="row">
+                          <div class="col-xs-6">
+                            <i class="fa fa-check fa-5x"></i>
+                          </div>
+                          <div class="col-xs-6 text-right">
+                            <p class="announcement-heading">12</p>
+                            <p class="announcement-text">To-Do Items</p>
+                          </div>
+                        </div>
+                      </div>
+                      <a href="#">
+                        <div class="panel-footer announcement-bottom">
+                          <div class="row">
+                            <div class="col-xs-6">
+                              Complete Tasks
+                            </div>
+                            <div class="col-xs-6 text-right">
+                              <i class="fa fa-arrow-circle-right"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="panel panel-danger">
+                      <div class="panel-heading">
+                        <div class="row">
+                          <div class="col-xs-6">
+                            <i class="fa fa-tasks fa-5x"></i>
+                          </div>
+                          <div class="col-xs-6 text-right">
+                            <p class="announcement-heading">18</p>
+                            <p class="announcement-text">Crawl Errors</p>
+                          </div>
+                        </div>
+                      </div>
+                      <a href="#">
+                        <div class="panel-footer announcement-bottom">
+                          <div class="row">
+                            <div class="col-xs-6">
+                              Fix Issues
+                            </div>
+                            <div class="col-xs-6 text-right">
+                              <i class="fa fa-arrow-circle-right"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="panel panel-success">
+                      <div class="panel-heading">
+                        <div class="row">
+                          <div class="col-xs-6">
+                            <i class="fa fa-comments fa-5x"></i>
+                          </div>
+                          <div class="col-xs-6 text-right">
+                            <p class="announcement-heading">56</p>
+                            <p class="announcement-text">New Orders!</p>
+                          </div>
+                        </div>
+                      </div>
+                      <a href="#">
+                        <div class="panel-footer announcement-bottom">
+                          <div class="row">
+                            <div class="col-xs-6">
+                              Complete Orders
+                            </div>
+                            <div class="col-xs-6 text-right">
+                              <i class="fa fa-arrow-circle-right"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                      <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Traffic Statistics: October 1, 2013 - October 31, 2013</h3>
+                      </div>
+                      <div class="panel-body">
+                        <div id="morris-chart-area" style="position: relative;"><svg height="342" version="1.1" width="1596" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.0</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs><text x="40.5" y="310" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" font-size="12px" font-family="sans-serif" font-weight="normal" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"><tspan dy="4.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">0</tspan></text><path fill="none" stroke="#aaaaaa" d="M53,310H1571" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="40.5" y="238.75" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" font-size="12px" font-family="sans-serif" font-weight="normal" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"><tspan dy="4.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">500</tspan></text><path fill="none" stroke="#aaaaaa" d="M53,238.75H1571" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="40.5" y="167.5" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" font-size="12px" font-family="sans-serif" font-weight="normal" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"><tspan dy="4.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">1,000</tspan></text><path fill="none" stroke="#aaaaaa" d="M53,167.5H1571" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="40.5" y="96.25000000000003" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" font-size="12px" font-family="sans-serif" font-weight="normal" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"><tspan dy="4.500000000000028" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">1,500</tspan></text><path fill="none" stroke="#aaaaaa" d="M53,96.25000000000003H1571" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="40.5" y="25" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" font-size="12px" font-family="sans-serif" font-weight="normal" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"><tspan dy="4.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2,000</tspan></text><path fill="none" stroke="#aaaaaa" d="M53,25H1571" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="1520.4" y="322.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,6)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"><tspan dy="4.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2012-10-30</tspan></text><text x="1419.2" y="322.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,6)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"><tspan dy="4.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2012-10-28</tspan></text><text x="1318" y="322.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,6)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"><tspan dy="4.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2012-10-26</tspan></text><text x="1216.8000000000002" y="322.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,6)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"><tspan dy="4.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2012-10-24</tspan></text><text x="1115.6000000000001" y="322.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,6)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"><tspan dy="4.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2012-10-22</tspan></text><text x="1014.4000000000001" y="322.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,6)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"><tspan dy="4.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2012-10-20</tspan></text><text x="913.2" y="322.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,6)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"><tspan dy="4.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2012-10-18</tspan></text><text x="812" y="322.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,6)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"><tspan dy="4.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2012-10-16</tspan></text><text x="710.8000000000001" y="322.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,6)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"><tspan dy="4.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2012-10-14</tspan></text><text x="609.6" y="322.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,6)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"><tspan dy="4.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2012-10-12</tspan></text><text x="508.40000000000003" y="322.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,6)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"><tspan dy="4.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2012-10-10</tspan></text><text x="407.20000000000005" y="322.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,6)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"><tspan dy="4.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2012-10-08</tspan></text><text x="306" y="322.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,6)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"><tspan dy="4.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2012-10-06</tspan></text><text x="204.8" y="322.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,6)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"><tspan dy="4.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2012-10-04</tspan></text><text x="103.6" y="322.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,6)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;"><tspan dy="4.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2012-10-02</tspan></text><path fill="#2577b5" stroke="#000000" d="M53,195.715L103.6,198.4225L154.2,193.15L204.8,190.4425L255.4,197.14000000000001L306,187.59250000000003L356.6,197.425L407.20000000000005,70.60000000000002L457.8,83.14000000000001L508.40000000000003,107.65L559,184.315L609.6,183.3175L660.2,193.29250000000002L710.8000000000001,189.0175L761.4000000000001,186.025L812,158.5225L862.6,140.14000000000001L913.2,135.58L963.8000000000001,120.6175L1014.4000000000001,120.6175L1065,133.44250000000002L1115.6000000000001,140.425L1166.2,123.04000000000002L1216.8000000000002,125.7475L1267.4,127.17250000000001L1318,132.16000000000003L1368.6000000000001,121.47250000000003L1419.2,111.92500000000001L1469.8000000000002,107.65L1520.4,92.1175L1571,40.39000000000004L1571,310L53,310Z" fill-opacity="1" stroke-width="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></path><path fill="none" stroke="#0b62a4" d="M53,195.715L103.6,198.4225L154.2,193.15L204.8,190.4425L255.4,197.14000000000001L306,187.59250000000003L356.6,197.425L407.20000000000005,70.60000000000002L457.8,83.14000000000001L508.40000000000003,107.65L559,184.315L609.6,183.3175L660.2,193.29250000000002L710.8000000000001,189.0175L761.4000000000001,186.025L812,158.5225L862.6,140.14000000000001L913.2,135.58L963.8000000000001,120.6175L1014.4000000000001,120.6175L1065,133.44250000000002L1115.6000000000001,140.425L1166.2,123.04000000000002L1216.8000000000002,125.7475L1267.4,127.17250000000001L1318,132.16000000000003L1368.6000000000001,121.47250000000003L1419.2,111.92500000000001L1469.8000000000002,107.65L1520.4,92.1175L1571,40.39000000000004" stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><circle cx="53" cy="195.715" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="103.6" cy="198.4225" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="154.2" cy="193.15" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="204.8" cy="190.4425" r="7" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="255.4" cy="197.14000000000001" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="306" cy="187.59250000000003" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="356.6" cy="197.425" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="407.20000000000005" cy="70.60000000000002" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="457.8" cy="83.14000000000001" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="508.40000000000003" cy="107.65" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="559" cy="184.315" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="609.6" cy="183.3175" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="660.2" cy="193.29250000000002" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="710.8000000000001" cy="189.0175" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="761.4000000000001" cy="186.025" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="812" cy="158.5225" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="862.6" cy="140.14000000000001" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="913.2" cy="135.58" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="963.8000000000001" cy="120.6175" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="1014.4000000000001" cy="120.6175" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="1065" cy="133.44250000000002" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="1115.6000000000001" cy="140.425" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="1166.2" cy="123.04000000000002" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="1216.8000000000002" cy="125.7475" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="1267.4" cy="127.17250000000001" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="1318" cy="132.16000000000003" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="1368.6000000000001" cy="121.47250000000003" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="1419.2" cy="111.92500000000001" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="1469.8000000000002" cy="107.65" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="1520.4" cy="92.1175" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="1571" cy="40.39000000000004" r="4" fill="#0b62a4" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle></svg><div class="morris-hover morris-default-style" style="left: 161.8px; top: 123px;"><div class="morris-hover-row-label">2012-10-04</div><div class="morris-hover-point" style="color: #0b62a4">
+          Visits:
+          839
+        </div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.row -->
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div><!-- /#page-wrapper -->
+{% endblock %}
+
+{% block plugin %}
+    <script src="{{ STATIC_URL }}js/tablesorter/jquery.tablesorter.js"></script>
+    <script src="{{ STATIC_URL }}js/tablesorter/tables.js"></script>
+{% endblock %}

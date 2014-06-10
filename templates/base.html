@@ -1,37 +1,78 @@
 {% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <link rel="stylesheet" href="{{ STATIC_URL }}style.css" />
-    <title>{% block title %}User test{% endblock %}</title>
-</head>
-
-<body>
-    <div id="header">
-    {% block header %}
-    <a href="{% url 'index' %}">{% trans "Home" %}</a> |
-
-    {% if user.is_authenticated %}
-        {% trans "Logged in" %}: {{ user.username }}
-        (<a href="{% url 'auth_logout' %}">{% trans "Log out" %}</a> |
-        <a href="{% url 'auth_password_change' %}">{% trans "Change password" %}</a>)
-    {% else %}
-       <a href="{% url 'auth_login' %}">{% trans "Log in" %}</a>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CO2 Incubator Cloud Management{% endblock %}</title>
+    {% if not user.is_authenticated %}
+    <script>location.href="{% url 'index' %}";</script>
     {% endif %}
-    <hr />
-    {% endblock %}
-    </div>
 
-    <div id="content">
+    <!-- Core CSS - Include with every page -->
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/sb-admin.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}font-awesome/css/font-awesome.css" rel="stylesheet">
+</head>
+<body>
+    <div id="wrapper">
+    {% block navigation %}
+      <!-- Sidebar -->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'index' %}">CO2 Incubator Cloud Management</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav side-nav">
+            <li><a href="/dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <li><a href="/register"><i class="fa fa-edit"></i> Register</a></li>
+            {% include "device_nav.html" %}
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right navbar-user">
+            <li class="dropdown user-dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ user }} <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                {#<li><a href="#"><i class="fa fa-user"></i> Profile</a></li>#}
+                <li><a href="{% url 'auth_password_change' %}"><i class="fa fa-gear"></i> Change password</a></li>
+                <li class="divider"></li>
+                <li><a href="{% url 'auth_logout' %}"><i class="fa fa-power-off"></i> Log Out</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </nav>
+    {% endblock %}
+
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            {{ message }}
+        </div>
+    {% endfor %}
     {% block content %}{% endblock %}
-    </div>
 
-    <div id="footer">
-    {% block footer %}
-        <hr />
-    {% endblock %}
     </div>
+    <!-- /#wrapper -->
+
+    <!-- Core Scripts - Include with every page -->
+    <script src="{{ STATIC_URL }}js/jquery-1.10.2.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <!-- SB Admin Scripts - Include with every page -->
+    <script src="{{ STATIC_URL }}js/sb-admin.js"></script>
+
+    <!-- Page Specific Plugins -->
+    {% block plugin %}{% endblock %}
 </body>
-
 </html>

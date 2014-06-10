@@ -67,28 +67,38 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'ko-KR'
-
+LANGUAGE_CODE = 'en-US'
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
-
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(BASE_DIR, 'static'),
+)
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
 )
 
-ACCOUNT_ACTIVATION_DAYS = 2
-EMAIL_HOST = 'localhost'
-DEFAULT_FROM_EMAIL = 'webmaster@localhost'
 LOGIN_REDIRECT_URL = '/'
-AUTH_PROFILE_MODULE = 'registration.RegistrationProfile'
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: "/dashboard/",
+}
+# AUTH_USER_MODEL = 'cloud.User'
+# ACCOUNT_ACTIVATION_DAYS = 2
+# EMAIL_HOST = 'localhost'
+# DEFAULT_FROM_EMAIL = 'webmaster@localhost'
+# AUTH_PROFILE_MODULE = 'registration.RegistrationProfile'
+
+from django.contrib import messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}
