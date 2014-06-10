@@ -1,14 +1,20 @@
 from django.conf.urls import patterns, url, include
 
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'cloud.views.home', name="index"),
     url(r'^cj/$', 'cloud.views.cj'),
 
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
     url(r'', include('django.contrib.auth.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'^users/(?P<username>\w+)', 'cloud.views.users')
+    url(r'^users/(?P<username>\w+)', 'cloud.views.users'),
+
+    url(r'^device/$', 'cloud.views.device'),
+
+    url(r'^log/(?P<device>\w+)$', 'cloud.views.log')
+    # url(r'', 'cloud.views.view_data'),
+
 )
