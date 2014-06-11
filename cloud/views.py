@@ -1,5 +1,6 @@
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib import messages
 # from cloud.models import DeviceForm
 
 
@@ -23,20 +24,38 @@ def register(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login')
 
-    from cloud.models import Device, DeviceForm
-    if request.method == 'POST': # If the form has been submitted...
+    from cloud.models import User, Device, DeviceForm
+
+    if request.method == 'POST':  # If the form has been submitted...
         # ContactForm was defined in the previous section
-        form = DeviceForm(request.POST) # A form bound to the POST data
-        if form.is_valid(): # All validation rules pass
+        form = DeviceForm(request.POST)  # A form bound to the POST data
+        if form.is_valid():  # All validation rules pass
             # Process the data in form.cleaned_data
-            device_id = form.cleaned_data['device_id']
-            user = form.cleaned_data['user']
+            p_device_id = form.cleaned_data['device_id']
+            p_user = form.cleaned_data['user']
+
+            try:
+                d = Device.objects.get(device_id=p_device_id)
+                if d.user != None:
+                    messages.error(request, 'Error: Device ID already registered by another user.')
+                    return HttpResponseRedirect('/register')
+            except Device.DoesNotExist:
+                messages.error(request, "Error: Device is doesn't exist.")
+                return HttpResponseRedirect('/register')
+
+            try:
+                u = User.objects.get(username=p_user)
+            except User.DoesNotExist:
+                messages.error(request, 'Error: Uh-oh, something went wrong.')
+                return HttpResponseRedirect('/register')
 
             d = Device()
-            d.device_id = device_id
-            d.user = user
+            d.device_id = p_device_id
+            d.user = u
             d.save()
-            return HttpResponseRedirect('/device/') # Redirect after POST
+
+            messages.success(request, 'Success: Your registration has been succeeded.')
+            return HttpResponseRedirect('/register')
     else:
         return render(request, 'register.html', {
         })
@@ -46,14 +65,21 @@ def device(request, p_device_id):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login')
 
-    return render(request, 'device.html', {
+    from cloud.models import User, Device, DeviceForm
 
+    try:
+        d = Device.objects.get(device_id=p_device_id)
+    except Device.DoesNotExist:
+        messages.error(request, "Error: Device is doesn't exist.")
+        return HttpResponseRedirect('/dashboard')
+
+    return render(request, 'device.html', {
+        'device': p_device_id
     })
 
 
-
 # def device(request):
-#     from cloud.models import Device
+# from cloud.models import Device
 #     if request.method == 'POST': # If the form has been submitted...
 #         # ContactForm was defined in the previous section
 #         form = DeviceForm(request.POST) # A form bound to the POST data
