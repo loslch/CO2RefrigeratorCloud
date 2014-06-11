@@ -15,6 +15,8 @@ def dashboard(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login')
 
+    messages.success(request, "Welcome to CO<sub>2</sub> Incubator Cloud Management!")
+
     return render(request, 'dashboard.html', {
 
     })
@@ -71,6 +73,10 @@ def device(request, p_device_id):
         d = Device.objects.get(device_id=p_device_id)
     except Device.DoesNotExist:
         messages.error(request, "Error: Device is doesn't exist.")
+        return HttpResponseRedirect('/dashboard')
+
+    if d.user != request.user:
+        messages.error(request, 'Error: Uh-oh, something went wrong.')
         return HttpResponseRedirect('/dashboard')
 
     return render(request, 'device.html', {
