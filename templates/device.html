@@ -201,45 +201,155 @@
                 </div>
                 <!-- /.row -->
 <script>
+    var REQUEST_API_URL = "/api/request/";
+    var DEVICE_API_URL = "/api/device/";
+    function validateValue(value) {
+        var float= /^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$/;
+        if (!float.test(value)) {
+            alert("Value must be float or int.");
+            return false;
+        }
+        if (!(value >= 0 && value <= 100)) {
+            alert("Value should be more than 0 and less than 100.");
+            return false;
+        }
+        return true;
+    }
     function setCO2(default_value) {
         alertify.prompt("Enter CO<sub>2</sub> value you want to set", function (e, str) {
             if (e) {
-                // user clicked "ok"
+                if (!validateValue(str)) return false;
+
+                var value = str;
+                $.ajax({
+                    dataType: "json",
+                    type: "POST",
+                    url: REQUEST_API_URL,
+                    data: '{"device_id": "{{ device }}", "request": "SET CO2", "value": "'+value+'"}',
+                    success: function(response) {
+                        if (response.status == '200') {
+                            alert("Your request has been sent successfully.");
+                            location.reload();
+                        } else {
+                            alert("Your request failed to complete.");
+                        }
+                    }
+                });
             }
         }, default_value);
     }
     function setO2(default_value) {
         alertify.prompt("Enter O<sub>2</sub> value you want to set", function (e, str) {
             if (e) {
-                // user clicked "ok"
+                if (!validateValue(str)) return false;
+
+                var value = str;
+                $.ajax({
+                    dataType: "json",
+                    type: "POST",
+                    url: REQUEST_API_URL,
+                    data: '{"device_id": "{{ device }}", "request": "SET O2", "value": "' + value + '"}',
+                    success: function(response) {
+                        if (response.status == '200') {
+                            alert("Your request has been sent successfully.");
+                            location.reload();
+                        } else {
+                            alert("Your request failed to complete.");
+                        }
+                    }
+                });
             }
         }, default_value);
     }
     function setTemperature(default_value) {
         alertify.prompt("Enter temperature value you want to set", function (e, str) {
             if (e) {
-                // user clicked "ok"
+                if (!validateValue(str)) return false;
+
+                var value = str;
+                $.ajax({
+                    dataType: "json",
+                    type: "POST",
+                    url: REQUEST_API_URL,
+                    data: '{"device_id": "{{ device }}", "request": "SET TEMPERATURE", "value": "'+value+'"}',
+                    success: function(response) {
+                        if (response.status == '200') {
+                            alert("Your request has been sent successfully.");
+                            location.reload();
+                        } else {
+                            alert("Your request failed to complete.");
+                        }
+                    }
+                });
             }
         }, default_value);
     }
     function setHumidity(default_value) {
         alertify.prompt("Enter humidity value you want to set", function (e, str) {
             if (e) {
-                // user clicked "ok"
+                if (!validateValue(str)) return false;
+
+                var value = str;
+                $.ajax({
+                    dataType: "json",
+                    type: "POST",
+                    url: REQUEST_API_URL,
+                    data: '{"device_id": "{{ device }}", "request": "SET HUMIDITY", "value": "'+value+'"}',
+                    success: function(response) {
+                        if (response.status == '200') {
+                            alert("Your request has been sent successfully.");
+                            location.reload();
+                        } else {
+                            alert("Your request failed to complete.");
+                        }
+                    }
+                });
             }
         }, default_value);
     }
     function deleteRequest(id) {
         alertify.confirm("<h4>Are you ABSOLUTELY sure?</h4>", function (e) {
             if (e) {
-                console.log(id);
+                var intRegex = /^\d+$/;
+                if(!intRegex.test(id)) {
+                    alert("Your request failed to complete.");
+                    return false;
+                }
+
+                $.ajax({
+                    dataType: "json",
+                    type: "DELETE",
+                    url: REQUEST_API_URL,
+                    data: '{"device_id": "{{ device }}", "request_id": "'+id+'"}',
+                    success: function(response) {
+                        if (response.status == '200') {
+                            alert("Your request has been sent successfully.");
+                            location.reload();
+                        } else {
+                            alert("Your request failed to complete.");
+                        }
+                    }
+                });
             }
         });
     }
     function deleteDevice() {
-        alertify.prompt("<h4>Are you ABSOLUTELY sure?</h4><br/>Please type in the name of the repository to confirm.", function (e, str) {
+        alertify.prompt("<h4>Are you ABSOLUTELY sure?</h4><br/>Please type in the name of the device to confirm.", function (e, str) {
             if (e && str==='{{ device }}') {
-                console.log('delete');
+                $.ajax({
+                    dataType: "json",
+                    type: "DELETE",
+                    url: DEVICE_API_URL,
+                    data: '{"device_id": "{{ device }}"}',
+                    success: function(response) {
+                        if (response.status == '200') {
+                            alert("Your request has been sent successfully.");
+                            location.href = "/dashboard/";
+                        } else {
+                            alert("Your request failed to complete.");
+                        }
+                    }
+                });
             }
         });
     }

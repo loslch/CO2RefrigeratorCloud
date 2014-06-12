@@ -135,6 +135,7 @@ def api_log(request):
         
         response_data['status'] = '200'
         return HttpResponse(Json.dumps(response_data), content_type="application/json")
+
     else:
         response_data['status'] = '400'
         return HttpResponse(Json.dumps(response_data), content_type="application/json")
@@ -142,35 +143,101 @@ def api_log(request):
 
 @csrf_exempt
 def api_request(request):
-    response_data = {}
-    from cloud.models import Device, Request
-    
-    json_data = getJsonData(request.raw_post_data)
-    if json_data == False:
-        response_data['status'] = '400'
-        return HttpResponse(Json.dumps(response_data), content_type="application/json")
+    from cloud.models import Device, Request, Status
 
-    try:
-        d = Device.objects.get(device_id=json_data['device_id'])
-    except Device.DoesNotExist:
-        response_data['status'] = '400'
-        return HttpResponse(Json.dumps(response_data), content_type="application/json")
-    
     response_data = {}
     if request.method == 'GET':
+        p_device_id = request.GET['device_id']
+        # create device and status instance if doesn't exist
+        device, c = Device.objects.get_or_create(device_id=p_device_id)
+        status, c = Status.objects.get_or_create(device_id=device)
+
+        try:
+            r = Request.objects.order_by('req_time').filter(device_id=device, isSended=False)[0]
+            r.isSended = True
+            r.save()
+
+            response_data['request'] = r.request
+            response_data['value'] = r.value
+            response_data['req_time'] = r.req_time.strftime("%Y-%m-%d %H:%M:%S")
+
+        except Request.DoesNotExist:
+            pass
+        except:
+            response_data['status'] = '400'
+            return HttpResponse(Json.dumps(response_data), content_type="application/json")
+
 
         response_data['status'] = '200'
         return HttpResponse(Json.dumps(response_data), content_type="application/json")
+
     elif request.method == 'POST':
-    
+        json = getJsonData(request.body)
+        if json == False:
+            response_data['status'] = '400'
+            return HttpResponse(Json.dumps(response_data), content_type="application/json")
+
+        try:
+            d = Device.objects.get(device_id=json['device_id'])
+        except:
+            response_data['status'] = '400'
+            return HttpResponse(Json.dumps(response_data), content_type="application/json")
+
+        r = Request()
+        r.device_id = d
+        for key in {'request', 'value'}:
+            if json.has_key(key) == False:
+                response_data['status'] = '400'
+                return HttpResponse(Json.dumps(response_data), content_type="application/json")
+            code = compile("r.%s = json['%s']" % (key, key), '<string>', 'exec')
+            exec code
+        r.save()
+
         response_data['status'] = '200'
         return HttpResponse(Json.dumps(response_data), content_type="application/json")
+
+    elif request.method == 'DELETE':
+        json = getJsonData(request.body)
+        if json == False:
+            response_data['status'] = '400'
+            return HttpResponse(Json.dumps(response_data), content_type="application/json")
+
+        try:
+            d = Device.objects.get(device_id=json['device_id'])
+            r = Request.objects.filter(device_id=d, pk=json['request_id'])
+            r.delete()
+        except:
+            response_data['status'] = '400'
+            return HttpResponse(Json.dumps(response_data), content_type="application/json")
+
+        response_data['status'] = '200'
+        return HttpResponse(Json.dumps(response_data), content_type="application/json")
+
+    else:
+        raise Http404
 
 
 @csrf_exempt
 def api_device(request):
+    from cloud.models import Device
+
     response_data = {}
     if request.method == 'DELETE':
-        pass
+        json = getJsonData(request.body)
+        if json == False:
+            response_data['status'] = '400'
+            return HttpResponse(Json.dumps(response_data), content_type="application/json")
+
+        try:
+            d = Device.objects.get(device_id=json['device_id'])
+            d.user = None
+            d.save()
+        except:
+            response_data['status'] = '400'
+            return HttpResponse(Json.dumps(response_data), content_type="application/json")
+
+        response_data['status'] = '200'
+        return HttpResponse(Json.dumps(response_data), content_type="application/json")
+
     else:
         raise Http404
