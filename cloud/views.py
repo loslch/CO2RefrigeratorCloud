@@ -59,6 +59,9 @@ def register(request):
 
             messages.success(request, 'Success: Your registration has been succeeded.')
             return HttpResponseRedirect('/register')
+        else:
+            messages.error(request, 'Error: Uh-oh, something went wrong.')
+            return HttpResponseRedirect('/register')
     else:
         return render(request, 'register.html', {
         })
@@ -158,7 +161,7 @@ def api_request(request):
             r.save()
 
             response_data['request'] = r.request
-            response_data['value'] = r.value
+            response_data['value'] = str(r.value)
             response_data['req_time'] = r.req_time.strftime("%Y-%m-%d %H:%M:%S")
 
         except Request.DoesNotExist:
