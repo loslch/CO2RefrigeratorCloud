@@ -1,0 +1,25 @@
+﻿POST /api/log
+
+request:
+{"device_id": "abcd1245", "log": "장비 문 닫힘", "log_time": "2014-06-11 14:36", "co2": "5.0", "o2": "21.0", "temperature": "25.1", "humidity": "40.0"}
+
+response:
+{"status": "200"} - success
+{"status": "400"} - error
+
+===
+
+GET /api/request
+
+request:
+{"device_id": "abcd1245"}
+
+response:
+{"device_id": "abcd1245", "status": "200", "request": "SET CO2", "value": "5.8"} - success
+{"device_id": "abcd1245", "status": "200", "request": "SET O2", "value": "21.8"} - success
+{"device_id": "abcd1245", "status": "200", "request": "SET TEMPERATURE", "value": "25.8"} - success
+{"device_id": "abcd1245", "status": "200", "request": "SET HUMIDITY", "value": "40.8"} - success
+{"device_id": "abcd1245", "status": "400"} - error
+
+===
+

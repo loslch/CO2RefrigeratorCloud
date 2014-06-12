@@ -27,6 +27,7 @@ class DeviceAdmin(admin.ModelAdmin):
 
 class Status(models.Model):
     device_id = models.OneToOneField(Device)
+    power = models.NullBooleanField(default=True, null=True)
     co2 = models.FloatField(null=True)
     o2 = models.FloatField(null=True)
     temperature = models.FloatField(null=True)
@@ -36,7 +37,7 @@ class Status(models.Model):
         return u'%s' % (self.device_id)
 
 class StatusAdmin(admin.ModelAdmin):
-    list_display = ('co2', 'o2', 'temperature', 'humidity')
+    list_display = ('device_id', 'co2', 'o2', 'temperature', 'humidity', 'power')
 
 class Log(models.Model):
     device_id = models.ForeignKey(Device)

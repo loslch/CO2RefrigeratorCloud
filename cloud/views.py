@@ -1,7 +1,8 @@
-from django.shortcuts import render, render_to_response
-from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
-# from cloud.models import DeviceForm
+import json as Json
 
 
 def index(request):
@@ -67,7 +68,7 @@ def device(request, p_device_id):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/login')
 
-    from cloud.models import User, Device, DeviceForm
+    from cloud.models import Device, Log, Request, Status
 
     try:
         d = Device.objects.get(device_id=p_device_id)
@@ -79,57 +80,97 @@ def device(request, p_device_id):
         messages.error(request, 'Error: Uh-oh, something went wrong.')
         return HttpResponseRedirect('/dashboard')
 
+    status = Status.objects.get(device_id=p_device_id)
+    logs = Log.objects.filter(device_id=p_device_id).order_by('-log_time')
+    requests = Request.objects.filter(device_id=p_device_id, isSended=False).order_by('-req_time')
+
     return render(request, 'device.html', {
-        'device': p_device_id
+        'device': p_device_id,
+        'status': status,
+        'logs': logs,
+        'requests': requests,
     })
+    
+
+def getJsonData(post_data):
+    d = Json.loads(post_data)
+    
+    try:
+        c = d['device_id']
+        # Convert all keys to lowercase
+        return dict((k.lower(), v) for k, v in d.iteritems())
+    except KeyError:
+        return False
 
 
-# def device(request):
-# from cloud.models import Device
-#     if request.method == 'POST': # If the form has been submitted...
-#         # ContactForm was defined in the previous section
-#         form = DeviceForm(request.POST) # A form bound to the POST data
-#         if form.is_valid(): # All validation rules pass
-#             # Process the data in form.cleaned_data
-#             device_id = form.cleaned_data['device_id']
-#             temperature = form.cleaned_data['temperature']
-#
-#             d = Device()
-#             d.device_id = device_id
-#             d.temperature = temperature
-#             d.save()
-#             return HttpResponseRedirect('/device/') # Redirect after POST
-#     else:
-#         from django.forms.models import modelformset_factory
-#         DeviceFormSet = modelformset_factory(Device)
-#         devices = DeviceFormSet()
-#         form = DeviceForm() # An unbound form
-#
-#     return render(request, 'device.html', {
-#         'form': form,
-#         'devices': devices,
-#     })
-#
-#
-# def log(request, device):
-#     from cloud.models import Device, Log
-#     if request.method == 'POST': # If the form has been submitted...
-#         form = DeviceForm(request.POST) # A form bound to the POST data
-#
-#         d = Device.objects.get(device_id=device)
-#         if d == None:
-#             d = Device()
-#             d.device_id = device
-#             d.temperature = 0
-#             d.save()
-#
-#         l = Log()
-#         l.device_id = d.device_id
-#         l.log = form.cleaned_data['log']
-#         l.log_time = form.cleaned_data['log_time']
-#         l.save()
-#         return HttpResponse('200')
-#     else:
-#         return HttpResponse('404')
-#
-#
+@csrf_exempt
+def api_log(request):
+    response_data = {}
+    if request.method == 'POST':
+        from cloud.models import Device, Log, Status
+        
+        json = getJsonData(request.body)
+        if json == False:
+            response_data['status'] = '400'
+            return HttpResponse(Json.dumps(response_data), content_type="application/json")
+
+        # create device and status instance if doesn't exist
+        device, c = Device.objects.get_or_create(device_id=json['device_id'])
+        status, c = Status.objects.get_or_create(device_id=device)
+
+        # set status
+        for key in {'co2', 'o2', 'temperature', 'humidity'}:
+            if json.has_key(key) == True:
+                code = compile("status.%s = json['%s']" % (key, key), '<string>', 'exec')
+                exec code
+        status.power = True
+        status.save()
+
+        # set log
+        l = Log()
+        l.device_id = device
+        l.log = json['log']
+        l.log_time = json['log_time']
+        l.save()
+        
+        response_data['status'] = '200'
+        return HttpResponse(Json.dumps(response_data), content_type="application/json")
+    else:
+        response_data['status'] = '400'
+        return HttpResponse(Json.dumps(response_data), content_type="application/json")
+
+
+@csrf_exempt
+def api_request(request):
+    response_data = {}
+    from cloud.models import Device, Request
+    
+    json_data = getJsonData(request.raw_post_data)
+    if json_data == False:
+        response_data['status'] = '400'
+        return HttpResponse(Json.dumps(response_data), content_type="application/json")
+
+    try:
+        d = Device.objects.get(device_id=json_data['device_id'])
+    except Device.DoesNotExist:
+        response_data['status'] = '400'
+        return HttpResponse(Json.dumps(response_data), content_type="application/json")
+    
+    response_data = {}
+    if request.method == 'GET':
+
+        response_data['status'] = '200'
+        return HttpResponse(Json.dumps(response_data), content_type="application/json")
+    elif request.method == 'POST':
+    
+        response_data['status'] = '200'
+        return HttpResponse(Json.dumps(response_data), content_type="application/json")
+
+
+@csrf_exempt
+def api_device(request):
+    response_data = {}
+    if request.method == 'DELETE':
+        pass
+    else:
+        raise Http404

@@ -16,9 +16,11 @@ urlpatterns = patterns('',
     url(r'^dashboard/$', 'cloud.views.dashboard'),
     url(r'^register/$', 'cloud.views.register'),
     url(r'^device/(?P<p_device_id>\w+)$', 'cloud.views.device'),
-    # url(r'^device/(?P<p_device_id>\w+)$/log', 'cloud.views.showlog'),
+    # url(r'^device/(?P<p_device_id>\w+)$/log/$', 'cloud.views.showlog'),
 
     # API of Devices
-    # url(r'^log/$', 'cloud.views.log'),
+    url(r'^api/log/$', 'cloud.views.api_log'),
+    url(r'^api/request/$', 'cloud.views.api_request'),
+    url(r'^api/device/$', 'cloud.views.api_device'),
 
 )

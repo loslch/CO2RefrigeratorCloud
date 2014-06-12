@@ -28,7 +28,7 @@
                             <i class="fa fa-flask fa-5x"></i>
                           </div>
                           <div class="col-xs-6 text-right">
-                            <p class="announcement-heading">5.0%</p>
+                            <p class="announcement-heading">{{ status.co2|floatformat:1 }}%</p>
                             <p class="announcement-text">CO<sub>2</sub></p>
                           </div>
                         </div>
@@ -55,7 +55,7 @@
                             <i class="fa fa-asterisk fa-5x"></i>
                           </div>
                           <div class="col-xs-6 text-right">
-                            <p class="announcement-heading">21.0%</p>
+                            <p class="announcement-heading">{{ status.o2|floatformat:1 }}%</p>
                             <p class="announcement-text">O<sub>2</sub></p>
                           </div>
                         </div>
@@ -82,7 +82,7 @@
                             <i class="fa fa-sun-o fa-5x"></i>
                           </div>
                           <div class="col-xs-6 text-right">
-                            <p class="announcement-heading">25.1</p>
+                            <p class="announcement-heading">{{ status.temperature|floatformat:1 }}&deg;C</p>
                             <p class="announcement-text">Temperature</p>
                           </div>
                         </div>
@@ -109,7 +109,7 @@
                             <i class="fa fa-tint fa-5x"></i>
                           </div>
                           <div class="col-xs-6 text-right">
-                            <p class="announcement-heading">40%</p>
+                            <p class="announcement-heading">{{ status.humidity|floatformat:1 }}%</p>
                             <p class="announcement-text">Humidity</p>
                           </div>
                         </div>
@@ -133,49 +133,6 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>Logs</h2>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover table-striped tablesorter">
-                                <thead>
-                                <tr>
-                                    <th class="header col-lg-2">Time <i class="fa fa-sort"></i></th>
-                                    <th class="header">Log <i class="fa fa-sort"></i></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>2014-06-11 14:36</td>
-                                    <td>장비 문 닫힘</td>
-                                </tr>
-                                <tr>
-                                    <td>2014-06-11 14:34</td>
-                                    <td>O2 농도 설정 (21.3%)</td>
-                                </tr>
-                                <tr>
-                                    <td>2014-06-11 14:31</td>
-                                    <td>온도 설정 (25.3)</td>
-                                </tr>
-                                <tr>
-                                    <td>2014-06-11 14:25</td>
-                                    <td>장비 문 열림</td>
-                                </tr>
-                                <tr>
-                                    <td>2014-06-11 14:20</td>
-                                    <td>O2 농도 설정 (5.0%)</td>
-                                </tr>
-                                <tr>
-                                    <td>2014-06-11 14:11</td>
-                                    <td>장비 ON</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.row -->
-
-                <div class="row">
-                    <div class="col-lg-12">
                         <h2>Requests</h2>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped">
@@ -188,27 +145,58 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                {% for r in requests %}
                                 <tr>
-                                    <td>2014-06-11 14:34</td>
-                                    <td>Set O2</td>
-                                    <td>21.3</td>
-                                    <td>X</td>
+                                    <td>{{ r.req_time|date:'Y-m-d H:i:s' }}</td>
+                                    <td>{{ r.request }}</td>
+                                    <td>{{ r.value }}</td>
+                                    <td><button id="{{ r.pk }}" type="button" class="btn btn-default btn-sm" onclick="deleteRequest(this.id);"><span class="fa fa-trash-o"></span></button></td>
                                 </tr>
+                                {% empty %}
                                 <tr>
-                                    <td>2014-06-11 14:31</td>
-                                    <td>Set Temperature</td>
-                                    <td>25.3</td>
-                                    <td>X</td>
+                                    <td colspan="4">Sorry, no request data of this device.</td>
                                 </tr>
-                                <tr>
-                                    <td>2014-06-11 14:20</td>
-                                    <td>Set CO2</td>
-                                    <td>5.0</td>
-                                    <td>X</td>
-                                </tr>
+                                {% endfor %}
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Logs</h2>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th class="header col-lg-2">Time </th>
+                                    <th class="header">Log </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for l in logs %}
+                                <tr>
+                                    <td>{{ l.log_time|date:'Y-m-d H:i:s' }}</td>
+                                    <td>{{ l.log }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="2">Sorry, no log data of this device.</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2></h2>
+                        <button type="button" class="btn btn-danger btn-xs" onclick="deleteDevice()">Delete this device</button>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -229,7 +217,6 @@
     }
     function setTemperature(default_value) {
         alertify.prompt("Enter temperature value you want to set", function (e, str) {
-            // str is the input text
             if (e) {
                 // user clicked "ok"
             }
@@ -237,19 +224,30 @@
     }
     function setHumidity(default_value) {
         alertify.prompt("Enter humidity value you want to set", function (e, str) {
-            // str is the input text
             if (e) {
                 // user clicked "ok"
             }
         }, default_value);
+    }
+    function deleteRequest(id) {
+        alertify.confirm("<h4>Are you ABSOLUTELY sure?</h4>", function (e) {
+            if (e) {
+                console.log(id);
+            }
+        });
+    }
+    function deleteDevice() {
+        alertify.prompt("<h4>Are you ABSOLUTELY sure?</h4><br/>Please type in the name of the repository to confirm.", function (e, str) {
+            if (e && str==='{{ device }}') {
+                console.log('delete');
+            }
+        });
     }
 </script>
     </div><!-- /#page-wrapper -->
 {% endblock %}
 
 {% block plugin %}
-    <script src="{{ STATIC_URL }}js/tablesorter/jquery.tablesorter.js"></script>
-    <script src="{{ STATIC_URL }}js/tablesorter/tables.js"></script>
     <script src="{{ STATIC_URL }}js/alertify.min.js"></script>
 
     <link rel="stylesheet" href="{{ STATIC_URL }}css/alertify.core.css" />
