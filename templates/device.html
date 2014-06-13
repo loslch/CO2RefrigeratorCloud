@@ -209,14 +209,14 @@
 <script>
     var REQUEST_API_URL = "/api/request/";
     var DEVICE_API_URL = "/api/device/";
-    function validateValue(value) {
+    function validateValue(value, min, max) {
         var float= /^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$/;
         if (!float.test(value)) {
             alert("Value must be float or int.");
             return false;
         }
-        if (!(value >= 0 && value <= 100)) {
-            alert("Value should be more than 0 and less than 100.");
+        if (!(value >= min && value <= max)) {
+            alert("Value should be more than "+min+" and less than "+max+".");
             return false;
         }
         return true;
@@ -224,7 +224,7 @@
     function setCO2(default_value) {
         alertify.prompt("Enter CO<sub>2</sub> value you want to set", function (e, str) {
             if (e) {
-                if (!validateValue(str)) return false;
+                if (!validateValue(str, 0, 100)) return false;
 
                 var value = str;
                 $.ajax({
@@ -247,7 +247,7 @@
     function setO2(default_value) {
         alertify.prompt("Enter O<sub>2</sub> value you want to set", function (e, str) {
             if (e) {
-                if (!validateValue(str)) return false;
+                if (!validateValue(str, 0, 100)) return false;
 
                 var value = str;
                 $.ajax({
@@ -270,7 +270,7 @@
     function setTemperature(default_value) {
         alertify.prompt("Enter temperature value you want to set", function (e, str) {
             if (e) {
-                if (!validateValue(str)) return false;
+                if (!validateValue(str, -100, 100)) return false;
 
                 var value = str;
                 $.ajax({
@@ -293,7 +293,7 @@
     function setHumidity(default_value) {
         alertify.prompt("Enter humidity value you want to set", function (e, str) {
             if (e) {
-                if (!validateValue(str)) return false;
+                if (!validateValue(str, 0, 100)) return false;
 
                 var value = str;
                 $.ajax({
