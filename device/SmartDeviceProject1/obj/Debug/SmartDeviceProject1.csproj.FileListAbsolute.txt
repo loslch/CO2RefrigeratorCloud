@@ -1,0 +1,12 @@
+C:\Users\caucse\Documents\Visual Studio 2008\Projects\Project1\SmartDeviceProject1\SmartDeviceProject1\bin\Debug\SmartDeviceProject1.exe
+C:\Users\caucse\Documents\Visual Studio 2008\Projects\Project1\SmartDeviceProject1\SmartDeviceProject1\bin\Debug\SmartDeviceProject1.pdb
+C:\Users\caucse\Documents\Visual Studio 2008\Projects\Project1\SmartDeviceProject1\SmartDeviceProject1\bin\Debug\SmartXCommon.dll
+C:\Users\caucse\Documents\Visual Studio 2008\Projects\Project1\SmartDeviceProject1\SmartDeviceProject1\bin\Debug\System.Net.Json.dll
+C:\Users\caucse\Documents\Visual Studio 2008\Projects\Project1\SmartDeviceProject1\SmartDeviceProject1\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\caucse\Documents\Visual Studio 2008\Projects\Project1\SmartDeviceProject1\SmartDeviceProject1\obj\Debug\SmartDeviceProject1.Form1.resources
+C:\Users\caucse\Documents\Visual Studio 2008\Projects\Project1\SmartDeviceProject1\SmartDeviceProject1\obj\Debug\SmartDeviceProject1.Properties.Resources.resources
+C:\Users\caucse\Documents\Visual Studio 2008\Projects\Project1\SmartDeviceProject1\SmartDeviceProject1\obj\Debug\SmartDeviceProject1.csproj.GenerateResource.Cache
+C:\Users\caucse\Documents\Visual Studio 2008\Projects\Project1\SmartDeviceProject1\SmartDeviceProject1\obj\Debug\SmartDeviceProject1.exe
+C:\Users\caucse\Documents\Visual Studio 2008\Projects\Project1\SmartDeviceProject1\SmartDeviceProject1\obj\Debug\SmartDeviceProject1.pdb
+C:\Users\caucse\Documents\Visual Studio 2008\Projects\Project1\SmartDeviceProject1\SmartDeviceProject1\bin\Debug\SmartX_IEC1000.dll
+C:\Users\caucse\Documents\Visual Studio 2008\Projects\Project1\SmartDeviceProject1\SmartDeviceProject1\bin\Debug\SmartXCommonExt.dll
